@@ -1,0 +1,30 @@
+{
+  "name": "easy-image-previewer",
+  "version": "0.1.0-beta1",
+  "description": "a lightly image previewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/impeiran/easy-image-previewer.git"
+  },
+  "keywords": [
+    "javascript",
+    "img",
+    "image",
+    "image-preivew",
+    "previewer"
+  ],
+  "author": "impeiran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/impeiran/easy-image-previewer/issues"
+  },
+  "homepage": "https://github.com/impeiran/easy-image-previewer#readme",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
