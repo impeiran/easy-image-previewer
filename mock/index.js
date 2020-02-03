@@ -1,0 +1,3 @@
+import previewer from '..'
+
+previewer()

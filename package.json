@@ -4,6 +4,7 @@
   "description": "a lightly image previewer",
   "main": "index.js",
   "scripts": {
+    "mock": "webpack-dev-server --config ./mock/webpack.mock.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +25,9 @@
   },
   "homepage": "https://github.com/impeiran/easy-image-previewer#readme",
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
   }
 }
