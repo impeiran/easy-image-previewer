@@ -21,7 +21,10 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Previewer Mock'
+      title: 'Previewer Mock',
+      meta: {
+        'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"'
+      }
     })
   ]
 }
