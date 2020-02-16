@@ -21,4 +21,10 @@
     top: 1%;
     right: 1%;
   }
+
+  &__btn-close {
+    color: #ddd;
+    cursor: pointer;
+    user-select: none;
+  }
 }
