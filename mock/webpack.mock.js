@@ -6,6 +6,8 @@ module.exports = {
 
   entry: path.resolve(__dirname, 'index.js'),
 
+  devtool: 'inline-source-map',
+
   devServer: {
     contentBase: false,
     hot: true,
@@ -17,6 +19,19 @@ module.exports = {
     quiet: true,
     clientLogLevel: 'warning',
     overlay: true
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ]
   },
 
   plugins: [

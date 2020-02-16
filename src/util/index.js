@@ -51,9 +51,20 @@ const assign = Object.assign || function () {
   return result;
 }
 
+const bind = function (target, context) {
+  return function wrap () {
+    const args = new Array(arguments.length)
+    for (let i = 0; i < arguments.length; i++) {
+      args.push(arguments[i])
+    }
+    return target.apply(context, args)
+  }
+}
+
 export default {
   isNumber,
   isFunction,
   forEach,
-  assign
+  assign,
+  bind
 }

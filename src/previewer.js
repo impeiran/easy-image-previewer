@@ -1,7 +1,16 @@
+import Previewer from './core/Previewer'
+import util from './util'
+
 function createInstance (config) {
-  
+  const context = new Previewer(config)
+
+  const instance = util.bind(Previewer.prototype.show, context)
+
+  return instance
 }
 
-module.exports = function () {
-  console.log(666)
-}
+let previewer = createInstance({})
+
+previewer.create = createInstance
+
+export default previewer
