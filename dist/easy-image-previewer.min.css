@@ -1,0 +1,1 @@
+.easy-previewer{position:fixed;top:0;left:0;right:0;bottom:0;opacity:0;background:rgba(0,0,0,.75);transition:all .3s}.easy-previewer--visible{opacity:1}.easy-previewer--hide{display:none}.easy-previewer__corner{position:absolute;top:1%;right:1%}.easy-previewer__btn-close{color:#ddd;cursor:pointer;user-select:none}
