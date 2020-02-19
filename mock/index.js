@@ -18,5 +18,5 @@ button.onclick = trigger
 
 document.body.append(button)
 
-trigger()
+// trigger()
 

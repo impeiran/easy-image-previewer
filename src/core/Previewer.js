@@ -1,6 +1,7 @@
 import util from '../util'
-import defaultSetting from './defaults'
 import hook from './hook'
+import handler from './handler'
+import defaultSetting from './defaults'
 
 import dom, {
   createEl,
@@ -12,6 +13,7 @@ import {
   NAMESPACE,
   CLASS_NAME_VISIBLE,
   CLASS_NAME_HIDE,
+  CLASS_NAME_LOADING,
   CLASS_NAME_CORNER,
   CLASS_NAME_INDICATOR,
   CLASS_NAME_BOARD,
@@ -28,15 +30,10 @@ class Previewer {
     this.showing = false
     this.setting = util.assign(defaultSetting, config || {})
 
-    Object.defineProperty(this, 'showing', {
-      set (val) {
-        console.log(666)
-        return val
-      }
-    })
+    this._initWatcher()
   }
 
-  _init () {
+  _mount () {
     const previewer = document.createElement('div')
 
     previewer.id = this.id
@@ -64,32 +61,41 @@ class Previewer {
     }
     this.setting.mount.appendChild(previewer)
     this.mounted = true
+    this.loading = true
   }
 
-  show (option) {
-    if (!this.mounted || !dom(`#${this.id}`)) {
-      this._init()
+  _initWatcher () {
+    const _this = this
+    const triggerMap = {
+      'showing': function (status) {
+        if (status) {
+          removeClass(_this.root, CLASS_NAME_HIDE)
+          addClass(_this.root, CLASS_NAME_VISIBLE)
+        } else {
+          addClass(_this.root, CLASS_NAME_HIDE)
+          removeClass(_this.root, CLASS_NAME_VISIBLE)
+        }
+      },
+
+      'loading': function (status) {
+        if (status) {
+          addClass(_this.root, CLASS_NAME_LOADING)
+        } else {
+          removeClass(_this.root, CLASS_NAME_LOADING)
+        }
+      }
     }
 
-    if (this.showing) {
-      return
-    }
-
-    removeClass(this.root, CLASS_NAME_HIDE)
-    addClass(this.root, CLASS_NAME_VISIBLE)
-    this.showing = true
-
-    return this
-  }
-
-  close () {
-    this.showing = false
-    addClass(this.root, CLASS_NAME_HIDE)
-    removeClass(this.root, CLASS_NAME_VISIBLE)
-    return this;
+    Object.keys(triggerMap).forEach(attr => {
+      Object.defineProperty(_this, attr, {
+        set (val) {
+          triggerMap[attr].call(_this, val)
+        }
+      })
+    })
   }
 }
 
-util.assign(Previewer.prototype, hook)
+util.assign(Previewer.prototype, hook, handler)
 
 export default Previewer
