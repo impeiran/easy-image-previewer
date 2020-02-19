@@ -1,12 +1,21 @@
 import util from '../util'
 import defaultSetting from './defaults'
+import hook from './hook'
 
 import dom, {
-  addClass
+  createEl,
+  addClass,
+  removeClass
 } from '../util/dom'
 
 import {
   NAMESPACE,
+  CLASS_NAME_VISIBLE,
+  CLASS_NAME_HIDE,
+  CLASS_NAME_CORNER,
+  CLASS_NAME_INDICATOR,
+  CLASS_NAME_BOARD,
+  CLASS_NAME_FOOTER,
   TEMPLATE
 } from '../util/constants'
 
@@ -18,6 +27,13 @@ class Previewer {
     this.mounted = false
     this.showing = false
     this.setting = util.assign(defaultSetting, config || {})
+
+    Object.defineProperty(this, 'showing', {
+      set (val) {
+        console.log(666)
+        return val
+      }
+    })
   }
 
   _init () {
@@ -27,13 +43,27 @@ class Previewer {
     previewer.innerHTML = TEMPLATE
 
     addClass(previewer, `${NAMESPACE}`)
-    addClass(previewer, `${NAMESPACE}--visible`)
+    addClass(previewer, `${CLASS_NAME_VISIBLE}`)
 
+    this.root = previewer
+    this.corner = previewer.querySelector(`.${CLASS_NAME_CORNER}`)
+    this.indicator = previewer.querySelector(`.${CLASS_NAME_INDICATOR}`)
+    this.board = previewer.querySelector(`.${CLASS_NAME_BOARD}`)
+    this.footer = previewer.querySelector(`.${CLASS_NAME_FOOTER}`)
+
+    this.corner.onclick = () => {
+      this.close()
+    }
+
+    /**
+     * mount dom into view
+     */
     const settingMount = this.setting.mount
     if (typeof settingMount === 'string') {
       this.setting.mount = dom(settingMount)
     }
     this.setting.mount.appendChild(previewer)
+    this.mounted = true
   }
 
   show (option) {
@@ -45,26 +75,21 @@ class Previewer {
       return
     }
 
+    removeClass(this.root, CLASS_NAME_HIDE)
+    addClass(this.root, CLASS_NAME_VISIBLE)
+    this.showing = true
+
     return this
   }
 
   close () {
-
-  }
-
-  onShow () {
+    this.showing = false
+    addClass(this.root, CLASS_NAME_HIDE)
+    removeClass(this.root, CLASS_NAME_VISIBLE)
     return this;
   }
-
-  onChange () {
-    return this;
-  }
-
-  onClose () {
-    return this;
-  }
-
-  
 }
+
+util.assign(Previewer.prototype, hook)
 
 export default Previewer

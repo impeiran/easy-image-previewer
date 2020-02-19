@@ -6,11 +6,26 @@ import util from '.'
  */
 const dom = selector => {
   return selector.indexOf('#') == 0
-    ? document.getElementById(selector)
+    ? document.getElementById(selector.slice(1))
     : document.querySelector(selector)
 }
 
 export default dom
+
+/**
+ * create an element
+ * @param {string} tagName
+ * @param {object} attrs 
+ * @param {string} inner 
+ */
+export const createEl = (tagName, attrs, inner) => {
+  const el = document.createElement(tagName)
+  Object.keys(attrs).forEach(k => {
+    el[k] = attrs[k]
+  })
+  el.innerHTML = inner
+  return el
+}
 
 /**
  * add className to element
@@ -21,13 +36,13 @@ export const addClass = (el, value) => {
   if (el.length) {
     util.forEach(el, element => {
       addClass(element, value)
-      return
     })
+    return el
   }
 
   if (el.classList) {
     el.classList.add(value)
-    return
+    return el
   }
 
   const className = el.className.trim()
@@ -37,4 +52,33 @@ export const addClass = (el, value) => {
   } else if (className.indexOf(value) == -1) {
     el.className = className + ' ' + value
   }
+
+  return el
+}
+
+/**
+ * remove className from element
+ * @param {element} el
+ * @param {string} value 
+ */
+export const removeClass = (el, value) => {
+  if (el.length) {
+    util.forEach(el, element => {
+      removeClass(element, value)
+    })
+    return el
+  }
+
+  if (el.classList) {
+    el.classList.remove(value)
+    return el
+  }
+
+  const className = el.className.trim()
+
+  if (className && className.indexOf(value) !== -1) {
+    el.className = className.replace(value, '')
+  }
+
+  return el
 }
