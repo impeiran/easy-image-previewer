@@ -1,3 +1,6 @@
+@import './animation.scss';
+@import './tool-bar.scss';
+
 .easy-previewer {
   position: fixed;
   top: 0;
@@ -5,11 +8,19 @@
   right: 0;
   bottom: 0;
   opacity: 0;
-  background: rgba(0, 0, 0, .75);
+  background: rgba(0, 0, 0, .6);
+  overflow: hidden;
+  user-select: none;
   transition: all .3s;
 
   &--visible {
     opacity: 1;
+
+    .easy-previewer{
+      &__btn-close {
+        animation: up2Down .5s;
+      }
+    }
   }
 
   &--hide {
@@ -18,13 +29,15 @@
 
   &__corner {
     position: absolute;
-    top: 1%;
-    right: 1%;
+    top: 0.5%;
+    right: 2%;
+    z-index: 10;
   }
 
   &__btn-close {
-    color: #ddd;
+    display: inline-block;
+    font-size: 30px;
+    color: #fff;
     cursor: pointer;
-    user-select: none;
   }
 }

@@ -1,0 +1,23 @@
+@keyframes up2Down {
+  0% {
+    opacity: 0;
+    transform: translateY(-300%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes down2Up {
+  0% {
+    opacity: 0;
+    transform: translateY(600%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
