@@ -24,6 +24,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      },
+      {
         test: /\.scss$/,
         use: [
           'style-loader',
@@ -45,7 +49,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Previewer Mock',
       meta: {
-        'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"'
+        'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0'
       }
     })
   ]

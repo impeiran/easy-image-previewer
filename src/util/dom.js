@@ -82,3 +82,31 @@ export const removeClass = (el, value) => {
 
   return el
 }
+
+/**
+ * listen event on target element(s)
+ * @param {element} target
+ * @param {string} type
+ * @param {function} callback
+ */
+export const listen = function (target, type, callback) {
+  if (target.length) {
+    Array.prototype.forEach.call(target, item => {
+      item.addEventListener(type, callback)
+    })
+    return {
+      destory: function () {
+        Array.prototype.forEach.call(target, item => {
+          item.removeEventListener(type, callback)
+        })
+      }
+    }
+  } else {
+    target.addEventListener(type, callback)
+    return {
+      destory: function () {
+        target.removeEventListener(type, callback)
+      }
+    }
+  }
+}

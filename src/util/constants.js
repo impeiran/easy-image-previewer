@@ -15,7 +15,9 @@ export const TEMPLATE = `
     <span class="${CLASS_NAME_BTN_CLOSE}" role="button">×</span>
   </div>
   <div class="${CLASS_NAME_INDICATOR}"></div>
-  <div class="${CLASS_NAME_BOARD}"></div>
+  <div class="${CLASS_NAME_BOARD}">
+    <img />
+  </div>
   <div class="${CLASS_NAME_FOOTER}">
     <ul class="${CLASS_NAME_TOOLBAR}">
       <li data-action="left" class="easy-previewer__tool-item"></li>

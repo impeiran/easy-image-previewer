@@ -1,6 +1,7 @@
 import util from '../util'
 import hook from './hook'
 import handler from './handler'
+import event from './event'
 import defaultSetting from './defaults'
 
 import dom, {
@@ -18,6 +19,7 @@ import {
   CLASS_NAME_INDICATOR,
   CLASS_NAME_BOARD,
   CLASS_NAME_FOOTER,
+  CLASS_NAME_TOOLBAR,
   TEMPLATE
 } from '../util/constants'
 
@@ -27,7 +29,8 @@ class Previewer {
   constructor (config) {
     this.id = `__${NAMESPACE}${id++}`
     this.mounted = false
-    this.showing = false
+    this.currentIndex = 0
+    this.list = []
     this.setting = util.assign(defaultSetting, config || {})
 
     this._initWatcher()
@@ -46,11 +49,9 @@ class Previewer {
     this.corner = previewer.querySelector(`.${CLASS_NAME_CORNER}`)
     this.indicator = previewer.querySelector(`.${CLASS_NAME_INDICATOR}`)
     this.board = previewer.querySelector(`.${CLASS_NAME_BOARD}`)
+    this.imgElement = this.board.querySelector('img')
     this.footer = previewer.querySelector(`.${CLASS_NAME_FOOTER}`)
-
-    this.corner.onclick = () => {
-      this.close()
-    }
+    this.toolbar = previewer.querySelector(`.${CLASS_NAME_TOOLBAR}`)
 
     /**
      * mount dom into view
@@ -61,41 +62,44 @@ class Previewer {
     }
     this.setting.mount.appendChild(previewer)
     this.mounted = true
-    this.loading = true
+
+    this._initEvent()
+    // this.loading = true
   }
 
   _initWatcher () {
-    const _this = this
     const triggerMap = {
       'showing': function (status) {
         if (status) {
-          removeClass(_this.root, CLASS_NAME_HIDE)
-          addClass(_this.root, CLASS_NAME_VISIBLE)
+          removeClass(this.root, CLASS_NAME_HIDE)
+          addClass(this.root, CLASS_NAME_VISIBLE)
         } else {
-          addClass(_this.root, CLASS_NAME_HIDE)
-          removeClass(_this.root, CLASS_NAME_VISIBLE)
+          addClass(this.root, CLASS_NAME_HIDE)
+          removeClass(this.root, CLASS_NAME_VISIBLE)
         }
       },
 
       'loading': function (status) {
         if (status) {
-          addClass(_this.root, CLASS_NAME_LOADING)
+          addClass(this.root, CLASS_NAME_LOADING)
         } else {
-          removeClass(_this.root, CLASS_NAME_LOADING)
+          removeClass(this.root, CLASS_NAME_LOADING)
         }
       }
     }
 
     Object.keys(triggerMap).forEach(attr => {
-      Object.defineProperty(_this, attr, {
+      Object.defineProperty(this, attr, {
+        configurable: true,
+        enumerable: true,
         set (val) {
-          triggerMap[attr].call(_this, val)
+          triggerMap[attr].call(this, val)
         }
       })
     })
   }
 }
 
-util.assign(Previewer.prototype, hook, handler)
+util.assign(Previewer.prototype, hook, event, handler)
 
 export default Previewer
