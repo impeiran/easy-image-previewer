@@ -17,6 +17,10 @@
     opacity: 1;
 
     .easy-previewer{
+      &__board img {
+        animation: zoomIn .5s;
+      }
+
       &__btn-close {
         animation: up2Down .5s;
       }
@@ -28,6 +32,11 @@
   }
 
   &--loading {
+    .easy-previewer__board img {
+      display: none;
+      animation: none;
+    }
+
     .easy-previewer__board:before {
       display: block;
       content: '';
@@ -51,6 +60,12 @@
     top: 0;
     bottom: 0;
     right: 0;
+
+    img {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &__corner {
@@ -63,6 +78,7 @@
   &__btn-close {
     display: inline-block;
     font-size: 30px;
+    font-weight: bold;
     color: #fff;
     cursor: pointer;
   }

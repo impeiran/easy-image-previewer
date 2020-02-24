@@ -4,10 +4,10 @@ const trigger = () => {
   previewer([
     { 
       title: 'avatar',
-      url: 'https://avatars3.githubusercontent.com/u/32994681?s=460&v=4'
+      url: 'http://img4.imgtn.bdimg.com/it/u=1762457155,50964291&fm=26&gp=0.jpg'
     }, {
       title: 'home',
-      url: 'https://www.baidu.com/img/pcpad_20b426f0af2c7ce8fb79ee4200a0e13e.png'
+      url: 'http://img2.imgtn.bdimg.com/it/u=2944839747,3135587715&fm=26&gp=0.jpg'
     }
   ])
 }
@@ -16,7 +16,7 @@ const button = document.createElement('button')
 button.innerText = '预览图片'
 button.onclick = trigger
 
-document.body.append(button)
+document.body.appendChild(button)
 
-// trigger()
+trigger()
 

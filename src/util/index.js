@@ -23,6 +23,17 @@ const isObject = function (target) {
 }
 
 /**
+ * check if target is empty
+ * @param {Any} target 
+ */
+const isEmpty = function (target) {
+  return [Object, Array].indexOf((
+      typeof target == 'number' ? target : target || {}
+    ).constructor) > -1 &&
+    !Object.keys((target || {})).length;
+};
+
+/**
  * iterate object
  * @param {object array array-like} target 
  * @param {function} cb 
@@ -50,11 +61,11 @@ const forEach = function (target, cb, startIndex) {
 /**
  * assign object
  */
-const assign = Object.assign || function () {
+const assign = function () {
   const result = arguments[0]
   forEach(arguments, object => {
-    forEach(object, (key, value) => {
-      result[key] = value
+    Object.keys(object).forEach(key => {
+      result[key] = object[key]
     })
   }, 1)
   return result;
@@ -67,47 +78,15 @@ const assign = Object.assign || function () {
  */
 const bind = function (target, context) {
   return function wrap () {
-    const args = new Array(arguments.length)
-    for (let i = 0; i < arguments.length; i++) {
-      args.push(arguments[i])
-    }
-    return target.apply(context, args)
-  }
-}
-
-/**
- * listen event on target element(s)
- * @param {element} target 
- * @param {string} type 
- * @param {function} callback 
- */
-const listen = function (target, type, callback) {
-  if (target.length) {
-    Array.prototype.forEach.call(target, item => {
-      item.addEventListener(type, callback)
-    })
-    return {
-      destory: function () {
-        Array.prototype.forEach.call(target, item => {
-          item.removeEventListener(type, callback)
-        })
-      }
-    }
-  } else {
-    target.addEventListener(type, callback)
-    return {
-      destory: function () {
-        target.removeEventListener(type, callback)
-      }
-    }
+    return target.apply(context, arguments)
   }
 }
 
 export default {
+  isEmpty,
   isNumber,
   isFunction,
   forEach,
   assign,
-  bind,
-  listen
+  bind
 }
