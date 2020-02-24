@@ -7,10 +7,9 @@ const genLabel = data => {
 export default {
   mount: document.body,
 
-  loop: true,
-
   label: genLabel,
   showLabel: false,
+
 
   showToolBar: true,
   showToolBarAnimation: false,

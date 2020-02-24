@@ -1,27 +1,17 @@
 @import './animation.scss';
 
 .easy-previewer {
-
-  &__footer {
+  &__toolbar {
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 3%;
+    bottom: 5%;
     margin: 0;
     padding: 0;
     z-index: 10;
-  }
-
-  &__toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 15px;
-    background-color: rgba(0, 0, 0, .6);
-    border-radius: 10px;
   }
 
   &__tool-item {
