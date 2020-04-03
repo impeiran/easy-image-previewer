@@ -26,7 +26,11 @@ export default {
     listener.loadImg = listen(
       this.board.querySelector('img'),
       'load',
-      () => {
+      (e) => {
+        console.log(e.target)
+        const img = e.target
+        console.log(img.width)
+        console.log(img.height)
         this.loading = false
       }
     )

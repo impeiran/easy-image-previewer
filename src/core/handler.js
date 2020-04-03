@@ -61,7 +61,9 @@ export default {
   },
 
   _loadImg () {
+    console.log(this.loading)
     this.loading = true
+    console.log(this.loading)
     this.imgElement.src = (this.list[this.currentIndex] || {}).url
   }
 }

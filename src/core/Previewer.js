@@ -5,9 +5,9 @@ import event from './event'
 import defaultSetting from './defaults'
 
 import dom, {
-  createEl,
   addClass,
-  removeClass
+  removeClass,
+  toggleClass
 } from '../util/dom'
 
 import {
@@ -68,34 +68,36 @@ class Previewer {
   }
 
   _initWatcher () {
+    const state = {
+      showing: false,
+      loading: false
+    }
+
     const triggerMap = {
-      'showing': function (status) {
-        if (status) {
-          removeClass(this.root, CLASS_NAME_HIDE)
-          addClass(this.root, CLASS_NAME_VISIBLE)
-        } else {
-          addClass(this.root, CLASS_NAME_HIDE)
-          removeClass(this.root, CLASS_NAME_VISIBLE)
-        }
+      showing: function (status) {
+        toggleClass(this.root, CLASS_NAME_HIDE, !status)
+        toggleClass(this.root, CLASS_NAME_VISIBLE, status)
       },
 
-      'loading': function (status) {
-        if (status) {
-          addClass(this.root, CLASS_NAME_LOADING)
-        } else {
-          removeClass(this.root, CLASS_NAME_LOADING)
-        }
+      loading: function (status) {
+        toggleClass(this.root, CLASS_NAME_LOADING, status)
       }
     }
 
     Object.keys(triggerMap).forEach(attr => {
-      Object.defineProperty(this, attr, {
+      const val = state[attr]
+      Object.defineProperty(state, attr, {
         configurable: true,
         enumerable: true,
+        get () {
+          return val
+        },
         set (val) {
           triggerMap[attr].call(this, val)
         }
       })
+      // proxy
+      this[attr] = state[attr]
     })
   }
 }

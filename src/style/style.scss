@@ -63,23 +63,25 @@
 
     img {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      top: 50%;
+      left: 50%;
+      // margin: -50px 0 0 -50px;
+      // width: 100px;
+      // height: 100px;
     }
   }
 
   &__corner {
     position: absolute;
     top: 0.5%;
-    right: 2%;
+    right: 4%;
     z-index: 10;
   }
 
   &__btn-close {
     display: inline-block;
     font-size: 30px;
-    font-weight: bold;
-    color: #fff;
+    color: #ccc;
     cursor: pointer;
   }
 }

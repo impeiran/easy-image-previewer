@@ -42,17 +42,17 @@ module.exports =  {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserWebpackPlugin({
-        cache: true,
-        terserOptions: {
-          ie8: false,
-          keep_fnames: false,
-          output: {
-            beautify: false,
-            comments: false
-          }
-        }
-      }),
+      // new TerserWebpackPlugin({
+      //   cache: true,
+      //   terserOptions: {
+      //     ie8: false,
+      //     keep_fnames: false,
+      //     output: {
+      //       beautify: false,
+      //       comments: false
+      //     }
+      //   }
+      // }),
 
       new OptimizeCSSAssetsPlugin()
     ]

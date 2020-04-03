@@ -20,10 +20,8 @@ export const TEMPLATE = `
   </div>
   <div class="${CLASS_NAME_FOOTER}">
     <ul class="${CLASS_NAME_TOOLBAR}">
-      <li data-action="left" class="easy-previewer__tool-item"></li>
-      <li data-action="rotate-left" class="easy-previewer__tool-item"></li>
-      <li data-action="rotate-right" class="easy-previewer__tool-item"></li>
-      <li data-action="right" class="easy-previewer__tool-item"></li>
+      <li data-action="left" class="easy-previewer__tool-item">←</li>
+      <li data-action="right" class="easy-previewer__tool-item">→</li>
     </ul>
   </div>
 `
