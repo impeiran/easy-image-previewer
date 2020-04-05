@@ -4,10 +4,10 @@ const trigger = () => {
   previewer([
     { 
       title: 'avatar',
-      url: 'http://img4.imgtn.bdimg.com/it/u=1762457155,50964291&fm=26&gp=0.jpg'
+      url: '//static.cnodejs.org/Fg4dIjPNKksKiOMmyIgGMEg1087O'
     }, {
       title: 'home',
-      url: 'http://img2.imgtn.bdimg.com/it/u=2944839747,3135587715&fm=26&gp=0.jpg'
+      url: '//static.cnodejs.org/Fh7MgA9zXpT3Gc-1UfXsd3o8FB6F'
     }
   ])
 }

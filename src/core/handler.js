@@ -42,7 +42,6 @@ export default {
   },
 
   prev () {
-    console.log(this.showing)
     this.currentIndex = this.setting.loop
       ? this.currentIndex === 0
           ? this.list.length - 1
@@ -60,10 +59,19 @@ export default {
     this._loadImg()
   },
 
+  destory () {
+    // destroy events
+    Object.keys(this.listener).forEach(k => {
+      const event = this.listener[k]
+      event.destory && event.destory()
+    })
+  },
+
   _loadImg () {
-    console.log(this.loading)
-    this.loading = true
-    console.log(this.loading)
+    this.loadingTimer = setTimeout(() => {
+      this.loading = true
+    }, 400)
+    this.imgElement.style = 'display: none;'
     this.imgElement.src = (this.list[this.currentIndex] || {}).url
   }
 }

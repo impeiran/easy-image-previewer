@@ -1,12 +1,10 @@
 import util from '../util'
-import hook from './hook'
 import handler from './handler'
 import event from './event'
 import defaultSetting from './defaults'
 
 import dom, {
   addClass,
-  removeClass,
   toggleClass
 } from '../util/dom'
 
@@ -32,7 +30,9 @@ class Previewer {
     this.currentIndex = 0
     this.list = []
     this.setting = util.assign(defaultSetting, config || {})
+    this.loadingTimer = null
 
+    this._initRatio()
     this._initWatcher()
   }
 
@@ -64,7 +64,12 @@ class Previewer {
     this.mounted = true
 
     this._initEvent()
-    // this.loading = true
+  }
+
+  _initRatio () {
+    this.maxWidth = Math.floor(document.documentElement.clientWidth * 0.8)
+    this.maxHeight = Math.floor(document.documentElement.clientHeight * 0.8)
+    this.screenRatio = this.maxWidth / this.maxHeight
   }
 
   _initWatcher () {
@@ -86,22 +91,21 @@ class Previewer {
 
     Object.keys(triggerMap).forEach(attr => {
       const val = state[attr]
-      Object.defineProperty(state, attr, {
+      Object.defineProperty(this, attr, {
         configurable: true,
         enumerable: true,
         get () {
           return val
         },
-        set (val) {
-          triggerMap[attr].call(this, val)
+        set (newVal) {
+          state[attr] = newVal
+          triggerMap[attr].call(this, newVal)
         }
       })
-      // proxy
-      this[attr] = state[attr]
     })
   }
 }
 
-util.assign(Previewer.prototype, hook, event, handler)
+util.assign(Previewer.prototype, event, handler)
 
 export default Previewer

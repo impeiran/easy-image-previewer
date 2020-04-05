@@ -74,6 +74,13 @@ export const toggleClass = (el, className, status) => {
   status ? addClass(el, className) : removeClass(el, className)
 }
 
+export const setStyle = (el, style) => {
+  el.style = Object.keys(style).reduce((ret, key) => {
+    ret += `${key}:${style[key]};`
+    return ret
+  }, '')
+}
+
 /**
  * listen event on target element(s)
  * @param {element} target

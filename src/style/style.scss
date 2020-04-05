@@ -17,9 +17,9 @@
     opacity: 1;
 
     .easy-previewer{
-      &__board img {
-        animation: zoomIn .5s;
-      }
+      // &__board img {
+      //   // animation: zoomIn .5s;
+      // }
 
       &__btn-close {
         animation: up2Down .5s;
@@ -34,7 +34,6 @@
   &--loading {
     .easy-previewer__board img {
       display: none;
-      animation: none;
     }
 
     .easy-previewer__board:before {
@@ -73,8 +72,8 @@
 
   &__corner {
     position: absolute;
-    top: 0.5%;
-    right: 4%;
+    top: 0px;
+    right: 10px;
     z-index: 10;
   }
 
